@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'capybara', '~> 2.1.0'
+gem 'rspec'
+gem 'turnip'
+gem 'turnip_formatter'
+gem 'gnawrnip', git: File.dirname(__FILE__) + '/../../gnawrnip'
+gem 'poltergeist'
