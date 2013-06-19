@@ -2,16 +2,22 @@ require 'coveralls'
 Coveralls.wear!
 
 require 'gnawrnip'
+require 'capybara'
 
-RSpec.configure do |config|
-  config.include(
-    Module.new do
-      # stub Capybara::Session.save_screenshot
-      def save_screenshot(file_path)
-        File.open(file_path, 'w') do |fp|
-          fp.print 'screenshot'
-        end
-      end
+class GnawrnipTestSession
+  def save_screenshot(file_path)
+    File.open(file_path, 'w') do |fp|
+      fp.print 'screenshot'
     end
-  )
+  end
+
+  def method_missing(name, *args, &block)
+    # nooooooop
+  end
+end
+
+module Capybara
+  def self.current_session
+    GnawrnipTestSession.new
+  end
 end
