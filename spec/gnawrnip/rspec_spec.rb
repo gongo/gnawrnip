@@ -3,8 +3,11 @@ require 'gnawrnip/rspec'
 
 module Gnawrnip
   describe 'Rspec' do
+    before do
+      Gnawrnip::Animation.should_receive(:generate).and_return('aiueo')
+    end
+
     let(:example) do
-      group = ::RSpec::Core::ExampleGroup.describe('Feature')
       example = group.example('example', {}) { expect(true).to be_false }
       group.run(
         Class.new do
@@ -16,8 +19,24 @@ module Gnawrnip
       example
     end
 
-    it 'should save screen shot at error' do
-      expect(example.metadata[:turnip][:screenshot]).to eq "c2NyZWVuc2hvdA==\n"
+    context '"turnip" spec group' do
+      let(:group) do
+        ::RSpec::Core::ExampleGroup.describe('Feature', turnip: true)
+      end
+
+      it 'should save screen shot at error' do
+        expect(example.metadata[:gnawrnip][:screenshot]).to eq 'aiueo'
+      end
+    end
+
+    context 'Not "turnip" spec group' do
+      let(:group) do
+        ::RSpec::Core::ExampleGroup.describe('Feature')
+      end
+
+      it 'should not save screen shot' do
+        expect(example.metadata).not_to include(:gnawrnip)
+      end
     end
   end
 end
