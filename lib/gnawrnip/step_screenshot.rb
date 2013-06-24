@@ -3,11 +3,11 @@ require 'turnip_formatter/step/failure'
 module Gnawrnip
   module StepScreenshot
     #
-    # @param  [String]  gif_file  base64 encoded
+    # @param  [String]  png_file  base64 encoded
     #
-    def self.build(gif_base64)
-      img = '<img src="data:image/gif;base64,'
-      img += gif_base64
+    def self.build(png_base64)
+      img = '<img src="data:image/png;base64,'
+      img += png_base64
       img += '" style="width: 90%; border: 2px solid black;" />'
       img
     end

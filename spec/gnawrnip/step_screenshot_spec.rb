@@ -13,7 +13,7 @@ module Gnawrnip
 
     describe '.build' do
       subject { template.build('aiueo') }
-      it { should match %r{<img src="data:image/gif;base64,aiueo"} }
+      it { should match %r{<img src="data:image/png;base64,aiueo"} }
     end
   end
 end

@@ -11,12 +11,14 @@ module Gnawrnip
       # @example
       #   image = Gnawrnip::Screenshot.take
       #
-      # @return  [Tempfile]  Image of screenshot
+      # @return  [String]  Base64-encoded image of screenshot
       #
       def take
-        tempfile = Tempfile.new(['gnawrnip', '.gif'])
+        tempfile = Tempfile.new(['gnawrnip', '.png'])
         session.save_screenshot(tempfile.path)
-        tempfile
+        image = Base64.encode64(tempfile.read)
+        tempfile.close
+        image
       end
 
       private

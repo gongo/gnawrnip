@@ -12,8 +12,7 @@ RSpec.configure do |config|
       example.metadata[:gnawrnip] = {}
 
       # example.metadata[:gnawrnip][:screenshot] = Gnawrnip::Animation.generate
-      image = Gnawrnip::Screenshot.take
-      example.metadata[:gnawrnip][:screenshot] = Base64.encode64(image.read)
+      example.metadata[:gnawrnip][:screenshot] = Gnawrnip::Screenshot.take
     end
   end
 end

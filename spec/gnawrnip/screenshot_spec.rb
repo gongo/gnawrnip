@@ -4,10 +4,10 @@ require 'gnawrnip/screenshot'
 module Gnawrnip
   describe Screenshot do
     describe '.take' do
-      subject { Screenshot.take.read }
+      subject { Screenshot.take }
 
       # see GnawrnipTestSession::save_screenshot
-      it { should == 'screenshot' }
+      it { should == "c2NyZWVuc2hvdA==\n" }
     end
   end
 end
