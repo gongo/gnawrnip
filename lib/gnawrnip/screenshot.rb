@@ -14,7 +14,7 @@ module Gnawrnip
       # @return  [Tempfile]  Image of screenshot
       #
       def take
-        tempfile = Tempfile.new(['gnawrnip', '.png'])
+        tempfile = Tempfile.new(['gnawrnip', '.gif'])
         session.save_screenshot(tempfile.path)
         tempfile
       end

@@ -3,10 +3,6 @@ require 'gnawrnip/rspec'
 
 module Gnawrnip
   describe 'Rspec' do
-    before do
-      Gnawrnip::Animation.should_receive(:generate).and_return('aiueo')
-    end
-
     let(:example) do
       example = group.example('example', {}) { expect(true).to be_false }
       group.run(
@@ -25,7 +21,7 @@ module Gnawrnip
       end
 
       it 'should save screen shot at error' do
-        expect(example.metadata[:gnawrnip][:screenshot]).to eq 'aiueo'
+        expect(example.metadata[:gnawrnip][:screenshot]).to eq "c2NyZWVuc2hvdA==\n"
       end
     end
 

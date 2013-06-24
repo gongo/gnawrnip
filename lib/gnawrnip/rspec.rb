@@ -10,7 +10,10 @@ RSpec.configure do |config|
   config.after(:each, turnip: true) do
     if example.exception
       example.metadata[:gnawrnip] = {}
-      example.metadata[:gnawrnip][:screenshot] = Gnawrnip::Animation.generate
+
+      # example.metadata[:gnawrnip][:screenshot] = Gnawrnip::Animation.generate
+      image = Gnawrnip::Screenshot.take
+      example.metadata[:gnawrnip][:screenshot] = Base64.encode64(image.read)
     end
   end
 end
