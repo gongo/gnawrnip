@@ -16,7 +16,7 @@ module Gnawrnip
       def take
         tempfile = Tempfile.new(['gnawrnip', '.png'])
         session.save_screenshot(tempfile.path)
-        image = Base64.encode64(tempfile.read)
+        image = Base64.strict_encode64(tempfile.read)
         tempfile.close
         image
       end

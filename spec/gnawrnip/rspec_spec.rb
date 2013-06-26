@@ -15,13 +15,17 @@ module Gnawrnip
       example
     end
 
+    before do
+      Gnawrnip::Animation.stub(:frames) { ['aiueo', 'lllll'] }
+    end
+
     context '"turnip" spec group' do
       let(:group) do
         ::RSpec::Core::ExampleGroup.describe('Feature', turnip: true)
       end
 
       it 'should save screen shot at error' do
-        expect(example.metadata[:gnawrnip][:screenshot]).to eq "c2NyZWVuc2hvdA==\n"
+        expect(example.metadata[:gnawrnip][:screenshot]).to eq ['aiueo', 'lllll']
       end
     end
 
