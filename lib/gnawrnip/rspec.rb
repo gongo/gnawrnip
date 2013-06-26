@@ -10,7 +10,7 @@ RSpec.configure do |config|
   config.after(:each, turnip: true) do
     if example.exception
       example.metadata[:gnawrnip] = {}
-      example.metadata[:gnawrnip][:screenshot] = Gnawrnip::Animation.frames
+      example.metadata[:gnawrnip][:screenshot] = Gnawrnip::Animation.frames.compact
     end
   end
 end

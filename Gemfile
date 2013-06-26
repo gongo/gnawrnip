@@ -5,5 +5,6 @@ gemspec
 
 group :test do
   gem 'poltergeist'
+  gem 'selenium-webdriver'
   gem 'sinatra'
 end

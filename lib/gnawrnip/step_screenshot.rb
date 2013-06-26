@@ -4,38 +4,44 @@ require 'turnip_formatter/step/failure'
 
 module Gnawrnip
   module StepScreenshot
-    #
-    # @param  [Array]  png_base64_list  array of base64 encoded image
-    #
-    def self.build(png_base64_list)
-      case png_base64_list.length
-      when 0
-        no_screenshot_image
-      when 1
-        still_image(png_base64_list.first)
-      else
-        animation_image(png_base64_list)
+    class << self
+      #
+      # @param  [Array]  png_base64_list  array of base64 encoded image
+      #
+      def build(png_base64_list)
+        case png_base64_list.length
+        when 0
+          description_no_screenshot
+        when 1
+          still_image(png_base64_list.first)
+        else
+          animation_image(png_base64_list)
+        end
       end
-    end
 
-    private
+      def description_no_screenshot
+        @no_screenshot ||= description_frame(:no_screenshot)
+        still_image(@no_screenshot)
+      end
 
-    def self.no_screenshot_image
-      path = File.dirname(__FILE__) + '/noscreenshot.png'
-      @no_screenshot_image ||= Base64.strict_encode64(File.read(path))
-      still_image(@no_screenshot_image)
-    end
+      def animation_image(images)
+        text = '<div class="screenshot animation">'
+        text += images.map { |data| img_tag(data) }.join
+        text + '</div>'
+      end
 
-    def self.animation_image(images)
-      '<div class="screenshot animation">' + images.map { |data| img_tag(data) }.join + '</div>'
-    end
+      def still_image(data)
+        '<div class="screenshot">' + img_tag(data) + '</div>'
+      end
 
-    def self.still_image(data)
-      '<div class="screenshot">' + img_tag(data) + '</div>'
-    end
+      def img_tag(data)
+        '<img src="data:image/png;base64,' + data + '"/>'
+      end
 
-    def self.img_tag(data)
-      '<img src="data:image/png;base64,' + data + '"/>'
+      def description_frame(scene)
+        path = File.dirname(__FILE__) + "/#{scene.to_s}.png"
+        Base64.strict_encode64(File.read(path))
+      end
     end
   end
 end

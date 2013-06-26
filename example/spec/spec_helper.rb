@@ -17,3 +17,5 @@ end
 require_relative '../web'
 Capybara.app = Sinatra::Application.new
 Capybara.default_driver = :poltergeist
+Capybara.javascript_driver = :selenium
+
