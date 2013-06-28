@@ -1,23 +1,34 @@
+require 'tempfile'
+require 'capybara'
+
 require 'coveralls'
 Coveralls.wear!
 
 require 'gnawrnip'
-require 'capybara'
 
-class GnawrnipTestSession
-  def save_screenshot(file_path)
-    File.open(file_path, 'w') do |fp|
-      fp.print 'screenshot'
-    end
+module GnawrnipTest
+  def self.image(data)
+    tempfile = Tempfile.new('gnarwnip_test')
+    tempfile.write(data)
+    tempfile.rewind
+    tempfile
   end
 
-  def method_missing(name, *args, &block)
-    # nooooooop
+  class Session
+    def save_screenshot(file_path)
+      File.open(file_path, 'w') do |fp|
+        fp.print 'screenshot'
+      end
+    end
+
+    def method_missing(name, *args, &block)
+      # nooooooop
+    end
   end
 end
 
 module Capybara
   def self.current_session
-    GnawrnipTestSession.new
+    GnawrnipTest::Session.new
   end
 end
