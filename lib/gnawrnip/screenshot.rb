@@ -1,4 +1,5 @@
 require 'tempfile'
+require 'time'
 require 'capybara'
 
 module Gnawrnip
