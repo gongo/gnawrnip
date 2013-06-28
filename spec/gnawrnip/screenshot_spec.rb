@@ -4,14 +4,14 @@ require 'gnawrnip/screenshot'
 module Gnawrnip
   describe Screenshot do
     describe '.take' do
-      subject { Screenshot.take }
+      subject { Screenshot.take.read }
 
       # see GnawrnipTestSession::save_screenshot
-      it { should == "c2NyZWVuc2hvdA==" }
+      it { should == "screenshot" }
 
       context 'not support save_screenshot' do
         before do
-          GnawrnipTestSession.any_instance.stub(:save_screenshot) do
+          GnawrnipTest::Session.any_instance.stub(:save_screenshot) do
             raise Capybara::NotSupportedByDriverError
           end
         end
@@ -22,7 +22,7 @@ module Gnawrnip
 
       context 'raise unknown error' do
         before do
-          GnawrnipTestSession.any_instance.stub(:save_screenshot) do
+          GnawrnipTest::Session.any_instance.stub(:save_screenshot) do
             raise Timeout::Error
           end
         end
