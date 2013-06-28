@@ -21,8 +21,7 @@ module Gnawrnip
       #
       #
       # @param   [Fixnum]  wait_second  Second to repeat the retry
-      #
-      # @return  [String]  Base64-encoded image of screenshot
+      # @return  [Tempfile]  Image file of screenshot
       #
       def take(wait_second = Capybara.default_wait_time)
         start_time = Time.now
@@ -30,9 +29,7 @@ module Gnawrnip
         begin
           tempfile = Tempfile.new(['gnawrnip', '.png'])
           session.save_screenshot(tempfile.path)
-          image = Base64.strict_encode64(tempfile.read)
-          tempfile.close
-          image
+          tempfile
         rescue Capybara::NotSupportedByDriverError => e
           raise e
         rescue => e
