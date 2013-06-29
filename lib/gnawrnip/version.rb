@@ -1,3 +1,3 @@
 module Gnawrnip
-  VERSION = "0.1.1rc"
+  VERSION = "0.1.1"
 end
