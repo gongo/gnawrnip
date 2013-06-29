@@ -10,6 +10,7 @@ module Gnawrnip
   class << self
     attr_accessor :photographer_driver
     attr_accessor :frame_interval
+    attr_accessor :frame_size
 
     def configure
       yield self
@@ -33,6 +34,7 @@ module Gnawrnip
 end
 
 Gnawrnip.configure do |c|
-  c.frame_interval = 1000
   c.photographer_driver = :js
+  c.frame_interval = 1000
+  c.frame_size = nil
 end
