@@ -40,7 +40,7 @@ module TurnipFormatter
         ul.steps {
             div.screenshot {
                > img {
-                 width: 90%;
+                 max-width: 90%;
                  border: 2px solid black;
                }
            }
