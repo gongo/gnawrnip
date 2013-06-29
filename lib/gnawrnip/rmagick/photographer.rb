@@ -28,9 +28,16 @@ module Gnawrnip::RMagick
 
     def photo_creator(images)
       paths = images.map(&:path)
-      image = ::Magick::ImageList.new(*paths)
-      image.delay = Gnawrnip.frame_interval / 10.0
-      image
+      photos = ::Magick::ImageList.new(*paths)
+
+      photos.delay = Gnawrnip.frame_interval / 10.0
+      unless Gnawrnip.frame_size.nil?
+        photos.each do |p|
+          p.scale!(*Gnawrnip.frame_size)
+        end
+      end
+
+      photos
     end
   end
 end

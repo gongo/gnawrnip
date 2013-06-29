@@ -21,9 +21,10 @@ Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :selenium
 
 Gnawrnip.configure do |c|
-  c.frame_interval = 1000 # milliseconds
   c.photographer_driver = :js
-  # c.photographer_driver = :rmagick
+  #c.photographer_driver = :rmagick
+  c.frame_interval = 1000 # milliseconds
+  c.frame_size = [640, 360] # width, height
 end
 
 Gnawrnip.ready!
