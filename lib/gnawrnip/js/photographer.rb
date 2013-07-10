@@ -12,15 +12,17 @@ module Gnawrnip::JS
 end
 
 TurnipFormatter::Template.add_js(<<-EOS)
-  $('.screenshot.animation').each(function() {
-      var imgs = $(this).children('img');
-      var frame = 0;
+  $(function() {
+    $('.screenshot.animation').each(function() {
+        var imgs = $(this).children('img');
+        var frame = 0;
 
-      imgs.hide();
-      setInterval(function() {
-          imgs.hide();
-          imgs.eq(frame).show();
-          frame = (++frame % imgs.length);
-      }, #{Gnawrnip.frame_interval.to_s});
+        imgs.hide();
+        setInterval(function() {
+            imgs.hide();
+            imgs.eq(frame).show();
+            frame = (++frame % imgs.length);
+        }, #{Gnawrnip.frame_interval.to_s});
+    });
   });
 EOS
