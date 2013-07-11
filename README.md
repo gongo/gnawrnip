@@ -7,6 +7,11 @@ Gnawrnip is a [TurnipFormatter](https://github.com/gongo/turnip_formatter) Add-o
 [![Code Climate](https://codeclimate.com/github/gongo/gnawrnip.png)](https://codeclimate.com/github/gongo/gnawrnip)
 [![Dependency Status](https://gemnasium.com/gongo/gnawrnip.png)](https://gemnasium.com/gongo/gnawrnip)
 
+## IMPORTANT!
+
+This project is currently in development (frequent releases).
+So it have potential for massive refactorings (that could be API breaking).
+
 
 ## Requirements
 
