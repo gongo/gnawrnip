@@ -16,7 +16,7 @@ module Gnawrnip
     end
 
     before do
-      Gnawrnip::Animation.stub(:frames) { ['aiueo', nil, 'lllll'] }
+      Gnawrnip.photographer.stub(:frames) { ['aiueo', nil, 'lllll'] }
     end
 
     context '"turnip" spec group' do

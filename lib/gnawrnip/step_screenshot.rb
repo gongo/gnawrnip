@@ -21,13 +21,13 @@ module Gnawrnip
 
       def animation_image(paths)
         text = '<div class="screenshot animation">'
-        text += Gnawrnip.photographer.animation(paths)
+        text += Gnawrnip.publisher.animation(paths)
         text + '</div>'
       end
 
       def single_image(path)
         text = '<div class="screenshot">'
-        text += Gnawrnip.photographer.single(path)
+        text += Gnawrnip.publisher.single(path)
         text + '</div>'
       end
     end
