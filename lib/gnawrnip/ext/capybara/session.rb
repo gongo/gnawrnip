@@ -10,7 +10,7 @@ module Capybara
       alias_method "after_hook_#{method}".to_sym, method
 
       define_method method do |*args, &block|
-        Gnawrnip::Animation.add_frame
+        Gnawrnip.photographer.take_shot
         send("after_hook_#{method}", *args, &block)
       end
     end

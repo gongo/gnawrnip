@@ -50,26 +50,25 @@ You can do to customize a screenshot.
 
 ```ruby
 Gnawrnip.configure do |c|
-  c.photographer_driver = :js
-  c.frame_interval = 1000 # milliseconds
-  c.frame_size = [640, 360] # width, height
+  c.publisher_driver = :js
+  c.make_animation   = true
+  c.frame_interval   = 1000 # milliseconds
+  c.frame_size       = [640, 360] # width, height
 end
-
-Gnawrnip.ready!
 ```
 
-`Gnawrnip.readty!` must be issued after `Gnawrnip.configure` in setup file.
-
-* `photographer_driver` (Symbol) A driver that make screenshot like animation GIF.
+* `publisher_driver` (Symbol) A driver that make screenshot like animation GIF.
     * `:js`: use jQuery and image files. **The size of the report file tends to be large this driver**
     * `:rmagick`: Make pure animation GIF using [RMagick](http://rmagick.rubyforge.org/). This driver is requires Gem `rmagick`. Add this line to your application's Gemfile:
 
         ```
         gem 'rmagick'
         ```
+* `make_animation` (Boolean) Whether to make animation GIF. (Default: true)
 * `frame_interval` (Integer) A time (millisecond) between each image in an animation. Default is `1000` (1sec)
+    * This option is enabled only when the `make_animation = true`.
 * `frame_size` (Array) A size of screenshot (width, height). Default is `nil` (`nil` means that use `Capybara.current_driver.browser` size) .
-    * This option is enabled only when the `photographer_driver = :rmagick`.
+    * This option is enabled only when the `publisher_driver = :rmagick`.
 
 As example, see [example/spec/spec_helper.rb](https://github.com/gongo/gnawrnip/tree/master/example/spec/spec_helper.rb) .
 
