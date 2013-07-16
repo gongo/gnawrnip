@@ -1,22 +1,25 @@
-require 'tempfile'
-require 'base64'
+require 'gnawrnip/screenshot'
 
 module Gnawrnip
-  module Photographer
-    def animation(paths)
-      raise NotImplementedError
+  class Photographer
+    def take_shot
+      frames << Screenshot.take
     end
 
-    def single(path)
-      image_tag(image_base64(path))
+    def reset!
+      frames.clear
     end
 
-    def image_base64(path)
-      Base64.strict_encode64(File.read(path))
+    #
+    # Close tempfiles.
+    #
+    def discard!
+      frames.each(&:close!)
+      reset!
     end
 
-    def image_tag(data, format = :png)
-      '<img src="data:image/' + format.to_s + ';base64,' + data + '"/>'
+    def frames
+      @frames ||= []
     end
   end
 end

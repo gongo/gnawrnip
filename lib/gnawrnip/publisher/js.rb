@@ -1,12 +1,14 @@
-require 'gnawrnip/photographer'
+require 'gnawrnip/publisher'
 require 'turnip_formatter/template'
 
-module Gnawrnip::JS
-  class Photographer
-    include Gnawrnip::Photographer
+module Gnawrnip
+  module Publisher
+    class JS
+      include Gnawrnip::Publisher
 
-    def animation(images)
-      images.map { |img| single(img) }.join
+      def animation(images)
+        images.map { |img| single(img) }.join
+      end
     end
   end
 end
