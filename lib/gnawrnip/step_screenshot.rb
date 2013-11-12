@@ -6,7 +6,7 @@ module Gnawrnip
   module StepScreenshot
     class << self
       #
-      # @param  [Array]  png_base64_list  array of base64 encoded image
+      # @param  [Array] png_base64_list  array of base64 encoded image
       #
       def build(png_base64_list)
         case png_base64_list.length
@@ -22,7 +22,16 @@ module Gnawrnip
       def animation_image(paths)
         text = '<div class="screenshot animation">'
         text += Gnawrnip.publisher.animation(paths)
-        text + '</div>'
+        text + <<-EOS
+            </div>
+            <div class="nav">
+                <div class="pager"></div>
+                <div class="manipulate">
+                    <span class="play selected">&#9654;</span>
+                    <span class="stop">&#9632;</span>
+                </div>
+            </div>
+        EOS
       end
 
       def single_image(path)
@@ -43,8 +52,42 @@ module TurnipFormatter
                  max-width: 90%;
                  border: 2px solid black;
                }
-           }
-       }
+            }
+
+            div.screenshot.animation {
+                + div.nav {
+                    text-align: center;
+
+                    .pager {
+                        margin-left: auto;
+                        margin-right: auto;
+
+                        span {
+                            font-size: 50px;
+                            display: inline;
+                            color: #999999;
+                            cursor: pointer;
+
+                            &.cycle-pager-active {
+                                color: red;
+                            }
+                        }
+                    }
+
+                    .manipulate {
+                        span {
+                            color: black;
+                            font-size: 30px;
+                            cursor: pointer;
+
+                            &.selected {
+                                color: red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
   EOS
 

@@ -28,7 +28,8 @@ module Gnawrnip
           should include '<div class="screenshot animation">'
           should include '<img src="data:image/png;base64,' + data1 + '"/>'
           should include '<img src="data:image/png;base64,' + data2 + '"/>'
-          should include '<img src="data:image/png;base64,' + data3 + '"/></div>'
+          should include '<img src="data:image/png;base64,' + data3 + '"/>'
+          should include '<div class="nav">'
         end
       end
 
@@ -38,6 +39,7 @@ module Gnawrnip
           data = Base64.strict_encode64('aiueo')
           should include '<div class="screenshot">'
           should include '<img src="data:image/png;base64,' + data + '"/></div>'
+          should_not include '<div class="nav">'
         }
       end
 
