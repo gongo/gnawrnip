@@ -18,3 +18,5 @@ tmp
 vendor
 example/vendor
 example/report.html
+.sass-cache
+example/.sass-cache
