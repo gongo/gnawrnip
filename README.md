@@ -21,7 +21,6 @@ So it have potential for massive refactorings (that could be API breaking).
 * RubyGems
     * capybara `~> 2.1.0`
     * turnip_formatter
-    * rmagick ( **optional** )
 
 ## Installation
 
@@ -57,18 +56,9 @@ Gnawrnip.configure do |c|
 end
 ```
 
-* `publisher_driver` (Symbol) A driver that make screenshot like animation GIF.
-    * `:js`: use jQuery and image files. **The size of the report file tends to be large this driver**
-    * `:rmagick`: Make pure animation GIF using [RMagick](http://rmagick.rubyforge.org/). This driver is requires Gem `rmagick`. Add this line to your application's Gemfile:
-
-        ```
-        gem 'rmagick'
-        ```
 * `make_animation` (Boolean) Whether to make animation GIF. (Default: true)
 * `frame_interval` (Integer) A time (millisecond) between each image in an animation. Default is `1000` (1sec)
     * This option is enabled only when the `make_animation = true`.
-* `frame_size` (Array) A size of screenshot (width, height). Default is `nil` (`nil` means that use `Capybara.current_driver.browser` size) .
-    * This option is enabled only when the `publisher_driver = :rmagick`.
 
 As example, see [example/spec/spec_helper.rb](https://github.com/gongo/gnawrnip/tree/master/example/spec/spec_helper.rb) .
 
