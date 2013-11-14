@@ -21,7 +21,6 @@ Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :selenium
 
 Gnawrnip.configure do |c|
-  c.publisher_driver = :js
   c.frame_interval = 1000 # milliseconds
   c.frame_size = [640, 360] # width, height
   c.make_animation = true

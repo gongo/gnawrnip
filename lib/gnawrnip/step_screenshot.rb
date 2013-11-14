@@ -20,17 +20,21 @@ module Gnawrnip
       end
 
       def animation_image(paths)
-        text = '<div class="screenshot animation">'
+        text = <<-EOS
+          <div class="screenshot animation">
+              <div class="nav">
+                  <div class="pager"></div>
+                  <div class="manipulate">
+                      <span class="play selected">&#9654;</span>
+                      <span class="stop">&#9632;</span>
+                  </div>
+              </div>
+              <div class="slides">
+        EOS
         text += Gnawrnip.publisher.animation(paths)
         text + <<-EOS
-            </div>
-            <div class="nav">
-                <div class="pager"></div>
-                <div class="manipulate">
-                    <span class="play selected">&#9654;</span>
-                    <span class="stop">&#9632;</span>
-                </div>
-            </div>
+              </div>
+          </div>
         EOS
       end
 
@@ -49,12 +53,13 @@ module TurnipFormatter
   Template.add_js(<<-EOS)
     $(function() {
         $('.screenshot.animation').each(function() {
-            var slide = $(this).cycle({
-                timeout: #{Gnawrnip.frame_interval.to_s},
-                pager: "+ div.nav > .pager"
+            var slide = $(this).find('.slides').cycle({
+                timeout: 1000,
+                autoHeight: "container",
+                pager: $(this).find('div.nav .pager')
             });
 
-            var nav = $(this).siblings('div.nav');
+            var nav = $(this).find('div.nav');
             var playButton = nav.find('.play');
             var stopButton = nav.find('.stop');
 
@@ -90,14 +95,14 @@ module TurnipFormatter
     div#steps-statistics section.scenario {
         ul.steps {
             div.screenshot {
-               > img {
+               img {
                  max-width: 90%;
                  border: 2px solid black;
                }
             }
 
             div.screenshot.animation {
-                + div.nav {
+                > div.nav {
                     text-align: center;
 
                     .pager {
