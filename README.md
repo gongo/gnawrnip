@@ -49,16 +49,29 @@ You can do to customize a screenshot.
 
 ```ruby
 Gnawrnip.configure do |c|
-  c.publisher_driver = :js
-  c.make_animation   = true
-  c.frame_interval   = 1000 # milliseconds
-  c.frame_size       = [640, 360] # width, height
+  c.frame_interval = 1000 # milliseconds
+  c.make_animation = true
+  c.max_frame_size = 1024 # pixel
 end
 ```
 
 * `make_animation` (Boolean) Whether to make animation GIF. (Default: true)
 * `frame_interval` (Integer) A time (millisecond) between each image in an animation. Default is `1000` (1sec)
     * This option is enabled only when the `make_animation = true`.
+* `max_frame_size` (Integer) Maximum size that use to resize of image.
+    * If given, it resize the image to fit to this value.
+    * Ignored if this value is greater than original width and height.
+    * Example:
+
+      ```
+         original: 640x480
+       this value: 300
+          result : 300x225
+
+         original: 480x640
+       this value: 400
+          result : 300x400
+      ```
 
 As example, see [example/spec/spec_helper.rb](https://github.com/gongo/gnawrnip/tree/master/example/spec/spec_helper.rb) .
 
