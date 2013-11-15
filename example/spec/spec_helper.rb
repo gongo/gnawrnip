@@ -22,6 +22,6 @@ Capybara.javascript_driver = :selenium
 
 Gnawrnip.configure do |c|
   c.frame_interval = 1000 # milliseconds
-  c.frame_size = [640, 360] # width, height
   c.make_animation = true
+  c.max_frame_size = 1024 # pixel
 end

@@ -29,6 +29,7 @@ module Gnawrnip
         begin
           tempfile = Tempfile.new(['gnawrnip', '.png'])
           session.save_screenshot(tempfile.path)
+          resize(tempfile.path)
           tempfile
         rescue Capybara::NotSupportedByDriverError => e
           raise e
@@ -41,9 +42,46 @@ module Gnawrnip
 
       private
 
-      def session
-        Capybara.current_session
-      end
+        def session
+          Capybara.current_session
+        end
+
+        def need_resize?
+          !Gnawrnip.max_frame_size.nil?
+        end
+
+        def resize(path)
+          require 'oily_png'
+
+          image = OilyPNG::Canvas.from_file(path)
+          new_width, new_height = calculate_new_size(image.width, image.height)
+
+          image.resample_bilinear!(new_width, new_height)
+          image.save(path)
+        end
+
+        #
+        # Return new frame size (width and height).
+        # This size is keeping original aspect ratio.
+        #
+        # @return  [Array]  New width and height size. [width, height]
+        #
+        def calculate_new_size(width, height)
+          ratio  = width / height
+          target = Gnawrnip.max_frame_size
+
+          return [width, height] if target > [width, height].max
+
+          if ratio < 0
+            new_width  = target * ratio
+            new_height = target
+          else
+            new_width  = target
+            new_height = target / ratio
+          end
+
+          return [new_width, new_height]
+        end
     end
   end
 end
