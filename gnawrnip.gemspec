@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'capybara', "~> 2.1"
   spec.add_dependency 'turnip_formatter', '~> 0.2.8'
+  spec.add_dependency 'oily_png'
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency 'rspec'

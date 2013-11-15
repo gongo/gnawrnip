@@ -5,9 +5,31 @@ require 'gnawrnip/publisher'
 
 module Gnawrnip
   class << self
+    #
+    # [Integer] Time (millisecond) between each image in animation
+    #
     attr_accessor :frame_interval
-    attr_accessor :frame_size
+
+    #
+    # [Boolean] Whether to make animation GIF
+    #
     attr_accessor :make_animation
+
+    #
+    # [Integer] Maximum size that use to resize of image.
+    #           If given, it resize the image to fit to this value.
+    #           Ignored if this value is greater than original width and height.
+    #
+    #           Example:
+    #                   original: 640x480
+    #                 this value: 300
+    #                    result : 300x225
+    #
+    #                   original: 480x640
+    #                 this value: 400
+    #                    result : 300x400
+    #
+    attr_accessor :max_frame_size
 
     def configure
       yield self
@@ -37,7 +59,7 @@ module Gnawrnip
 end
 
 Gnawrnip.configure do |c|
-  c.frame_interval   = 1000
-  c.frame_size       = nil
-  c.make_animation   = true
+  c.frame_interval = 1000
+  c.make_animation = true
+  c.max_frame_size = nil
 end
