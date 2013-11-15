@@ -29,7 +29,7 @@ module Gnawrnip
         begin
           tempfile = Tempfile.new(['gnawrnip', '.png'])
           session.save_screenshot(tempfile.path)
-          resize(tempfile.path)
+          resize(tempfile.path) if need_resize?
           tempfile
         rescue Capybara::NotSupportedByDriverError => e
           raise e

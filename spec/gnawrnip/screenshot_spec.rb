@@ -6,8 +6,24 @@ module Gnawrnip
     describe '.take' do
       subject { Screenshot.take.read }
 
-      # see GnawrnipTestSession::save_screenshot
-      it { should == "screenshot" }
+      context 'No given max frame size' do
+        before do
+          Screenshot.stub(:need_resize?) { false }
+          Screenshot.should_not_receive(:resize)
+        end
+
+        # see GnawrnipTestSession::save_screenshot
+        it { should == "screenshot" }
+      end
+
+      context 'No given max frame size' do
+        before do
+          Screenshot.stub(:need_resize?) { true }
+          Screenshot.should_receive(:resize)
+        end
+
+        it { should == "screenshot" }
+      end
 
       context 'not support save_screenshot' do
         before do
