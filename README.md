@@ -49,14 +49,14 @@ You can do to customize a screenshot.
 
 ```ruby
 Gnawrnip.configure do |c|
-  c.frame_interval = 1000 # milliseconds
+  c.frame_interval_ms = 1000 # milliseconds
   c.make_animation = true
   c.max_frame_size = 1024 # pixel
 end
 ```
 
 * `make_animation` (Boolean) Whether to make animation GIF. (Default: true)
-* `frame_interval` (Integer) A time (millisecond) between each image in an animation. Default is `1000` (1sec)
+* `frame_interval_ms` (Integer) A time (millisecond) between each image in an animation. Default is `1000`.
     * This option is enabled only when the `make_animation = true`.
 * `max_frame_size` (Integer) Maximum size that use to resize of image.
     * If given, it resize the image to fit to this value.

@@ -8,7 +8,7 @@ module Gnawrnip
     #
     # [Integer] Time (millisecond) between each image in animation
     #
-    attr_accessor :frame_interval
+    attr_accessor :frame_interval_ms
 
     #
     # [Boolean] Whether to make animation GIF
@@ -59,7 +59,7 @@ module Gnawrnip
 end
 
 Gnawrnip.configure do |c|
-  c.frame_interval = 1000
-  c.make_animation = true
-  c.max_frame_size = nil
+  c.frame_interval_ms = 1000
+  c.make_animation    = true
+  c.max_frame_size    = nil
 end
