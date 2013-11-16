@@ -1,6 +1,7 @@
 require 'tempfile'
 require 'time'
 require 'capybara'
+require 'oily_png'
 
 module Gnawrnip
   class Screenshot
@@ -51,8 +52,6 @@ module Gnawrnip
         end
 
         def resize(path)
-          require 'oily_png'
-
           image = OilyPNG::Canvas.from_file(path)
           new_width, new_height = calculate_new_size(image.width, image.height)
 
@@ -67,12 +66,12 @@ module Gnawrnip
         # @return  [Array]  New width and height size. [width, height]
         #
         def calculate_new_size(width, height)
-          ratio  = width / height
+          ratio  = width.to_f / height.to_f
           target = Gnawrnip.max_frame_size
 
           return [width, height] if target > [width, height].max
 
-          if ratio < 0
+          if ratio < 1
             new_width  = target * ratio
             new_height = target
           else
