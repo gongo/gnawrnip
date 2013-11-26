@@ -55,7 +55,7 @@ module TurnipFormatter
         $('.screenshot.animation').each(function() {
             var slide = $(this).find('.slides').cycle({
                 timeout: 1000,
-                autoHeight: "container",
+                autoHeight: "calc",
                 pager: $(this).find('div.nav .pager')
             });
 
