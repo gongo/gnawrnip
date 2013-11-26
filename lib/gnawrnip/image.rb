@@ -3,11 +3,6 @@ require 'oily_png'
 module Gnawrnip
   class Image
     #
-    # @return [File] Screenshot image file (png)
-    #
-    attr_reader :file
-
-    #
     # @parma [File] Screenshot image file (png)
     #
     def initialize(file)
@@ -29,9 +24,17 @@ module Gnawrnip
       @dimension.height
     end
 
+    def to_base64
+      Base64.strict_encode64(File.read(@file.path))
+    end
+
     def resize(width, height)
-      canvas.resample_bilinear(width, height).save(file.path)
+      canvas.resample_bilinear(width, height).save(@file.path)
       analysis
+    end
+
+    def close!
+      @file.close!
     end
 
     private
@@ -44,7 +47,7 @@ module Gnawrnip
       end
 
       def canvas
-        OilyPNG::Canvas.from_file(file)
+        OilyPNG::Canvas.from_file(@file)
       end
   end
 end

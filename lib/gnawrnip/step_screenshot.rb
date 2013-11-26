@@ -6,16 +6,16 @@ module Gnawrnip
   module StepScreenshot
     class << self
       #
-      # @param  [Array] png_base64_list  array of base64 encoded image
+      # @param  [Array] images  array of Gnawrnip::Image
       #
-      def build(png_base64_list)
-        case png_base64_list.length
+      def build(images)
+        case images.length
         when 0
           ''
         when 1
-          single_image(png_base64_list.first)
+          single_image(images.first)
         else
-          animation_image(png_base64_list)
+          animation_image(images)
         end
       end
 

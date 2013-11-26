@@ -11,8 +11,9 @@ module Gnawrnip
           end
         end
 
-        subject { lambda { Screenshot.take } }
-        it { should raise_error Capybara::NotSupportedByDriverError }
+        it 'should raise Capybara::NotSupportByDriverError' do
+          expect { Screenshot.take }.to raise_error Capybara::NotSupportedByDriverError
+        end
       end
     end
 
@@ -30,81 +31,24 @@ module Gnawrnip
             Time.stub(:now).and_return(now, now + 3)
           end
 
-          subject do
-            lambda {
+          it 'should raise Timeout Error' do
+            expect {
               Capybara.using_wait_time 2 do
                 Screenshot.take
               end
-            }
+            }.to raise_error Timeout::Error
           end
-
-          it { should raise_error Timeout::Error }
         end
       end
     end
 
-    context 'No given Gnawrnip.max_frame_size' do
+    context 'success screenshot' do
       describe '.take' do
-        subject { Screenshot.take.read }
-
-        context 'No given max frame size' do
-          before do
-            Gnawrnip.max_frame_size = nil
-            Screenshot.should_not_receive(:resize)
-          end
-
-          it { should == "screenshot" }
-        end
-      end
-    end
-
-    context 'Given Gnawrnip.max_frame_size' do
-      before do
-        OilyPNG::Canvas.stub(:from_file) { oily_png }
-      end
-
-      subject { Screenshot.take.read }
-
-      context 'width larger than height.' do
-        let(:oily_png) do
-          oily_png = double('oily_png', width: 640, height: 480, save: nil)
-          oily_png.should_receive(:resample_bilinear!).with(300, 225)
-          oily_png
-        end
-
         before do
-          Gnawrnip.max_frame_size = 300
+          Screenshot.should_receive(:shot).once
         end
 
-        it { should == "screenshot" }
-      end
-
-      context 'height larger than width.' do
-        let(:oily_png) do
-          oily_png = double('oily_png', width: 480, height: 640, save: nil)
-          oily_png.should_receive(:resample_bilinear!).with(300, 400)
-          oily_png
-        end
-
-        before do
-          Gnawrnip.max_frame_size = 400
-        end
-
-        it { should == "screenshot" }
-      end
-
-      context 'Given max_frame_size larger than original.' do
-        let(:oily_png) do
-          oily_png = double('oily_png', width: 640, height: 480, save: nil)
-          oily_png.should_receive(:resample_bilinear!).with(640, 480)
-          oily_png
-        end
-
-        before do
-          Gnawrnip.max_frame_size = 1024
-        end
-
-        it { should == "screenshot" }
+        it { Screenshot.take }
       end
     end
   end
