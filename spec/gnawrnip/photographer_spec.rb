@@ -8,6 +8,7 @@ module Gnawrnip
     end
 
     before do
+      Screenshot.stub(:take).and_return('foo')
       photographer.reset!
       photographer.take_shot
       photographer.take_shot

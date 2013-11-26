@@ -16,6 +16,7 @@ module Gnawrnip
     end
 
     before do
+      Gnawrnip.photographer.stub(:take_shot)
       Gnawrnip.photographer.stub(:frames) { ['aiueo', nil, 'lllll'] }
     end
 
