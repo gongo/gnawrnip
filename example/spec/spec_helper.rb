@@ -21,7 +21,7 @@ Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :selenium
 
 Gnawrnip.configure do |c|
-  c.frame_interval_ms = 1000
+  c.frame_interval_ms = 200
   c.make_animation    = true
   c.max_frame_size    = 1024 # pixel
 end
