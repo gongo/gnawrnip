@@ -25,8 +25,10 @@ module Gnawrnip
               <div class="nav">
                   <div class="pager"></div>
                   <div class="manipulate">
-                      <span class="play selected">&#9654;</span>
-                      <span class="stop">&#9632;</span>
+                      <i class="fa fa-2x fa-step-backward prev"></i>
+                      <i class="fa fa-2x fa-play play"></i>
+                      <i class="fa fa-2x fa-pause pause"></i>
+                      <i class="fa fa-2x fa-step-forward next"></i>
                   </div>
               </div>
               <div class="slides">
@@ -49,6 +51,7 @@ end
 
 module TurnipFormatter
   Template.add_js_file('http://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/20130801/jquery.cycle2.min.js')
+  Template.add_css_file('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
 
   Template.add_js(<<-EOS)
     $(function() {
@@ -60,32 +63,42 @@ module TurnipFormatter
             });
 
             var nav = $(this).find('div.nav');
-            var playButton = nav.find('.play');
-            var stopButton = nav.find('.stop');
+            var playButton  = nav.find('.play');
+            var pauseButton = nav.find('.pause');
+            var prevButton  = nav.find('.prev');
+            var nextButton  = nav.find('.next');
 
-            var coloringOfStopped = function() {
-                playButton.removeClass("selected");
-                stopButton.addClass("selected");
+            var setPauseManipulate = function() {
+                playButton.show();
+                pauseButton.hide();
+                prevButton.show();
+                nextButton.show();
             };
 
-            var coloringOfPlaying = function() {
-                playButton.addClass("selected");
-                stopButton.removeClass("selected");
+            var setPlayManipulate = function() {
+                playButton.hide();
+                pauseButton.show();
+                prevButton.hide();
+                nextButton.hide();
             };
 
             playButton.click(function() { slide.cycle('resume'); });
-            stopButton.click(function() { slide.cycle('pause'); });
+            pauseButton.click(function() { slide.cycle('pause'); });
+            prevButton.click(function() { slide.cycle('prev'); });
+            nextButton.click(function() { slide.cycle('next'); });
+
+            setPlayManipulate();
 
             slide.on('cycle-pager-activated', function(event, opts) {
                 slide.cycle('pause');
             });
 
             slide.on('cycle-paused', function(event, opts) {
-                coloringOfStopped();
+                setPauseManipulate();
             });
 
             slide.on('cycle-resumed', function(event, opts) {
-                coloringOfPlaying();
+                setPlayManipulate();
             });
         });
     });
@@ -122,13 +135,16 @@ module TurnipFormatter
                     }
 
                     .manipulate {
-                        span {
-                            color: black;
-                            font-size: 30px;
-                            cursor: pointer;
+                        margin-bottom: 1em;
 
-                            &.selected {
-                                color: red;
+                        i {
+                            color: black;
+                            cursor: pointer;
+                            margin-left: 0.3em;
+                            margin-right: 0.3em;
+
+                            &:hover {
+                                color: #aa0000;
                             }
                         }
                     }
