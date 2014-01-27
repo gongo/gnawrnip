@@ -15,8 +15,8 @@ module Gnawrnip
     end
 
     describe '.add_frame' do
-      subject { photographer.frames }
-      it { should have(2).elements }
+      subject { photographer.frames.length }
+      it { should eq 2 }
     end
 
     describe '.reset!' do
