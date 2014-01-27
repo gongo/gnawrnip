@@ -4,7 +4,7 @@ require 'gnawrnip/rspec'
 module Gnawrnip
   describe 'Rspec' do
     let(:example) do
-      example = group.example('example', {}) { expect(true).to be_false }
+      example = group.example('example', {}) { expect(true).to be false }
       group.run(
         Class.new do
           def self.method_missing(name, *args, &block)

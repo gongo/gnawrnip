@@ -3,7 +3,7 @@ require 'capybara/session'
 module Capybara
   class Session
     SAVE_SCREENSHOT_METHODS = NODE_METHODS + [
-      :visit, :has_title?, :has_no_title?
+      :visit, :has_title?, :has_no_title?, :go_back, :go_forward
     ]
 
     SAVE_SCREENSHOT_METHODS.each do |method|
