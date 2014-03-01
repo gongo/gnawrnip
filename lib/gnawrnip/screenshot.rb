@@ -32,9 +32,15 @@ module Gnawrnip
         rescue Capybara::NotSupportedByDriverError => e
           raise e
         rescue => e
-          raise e if (Time.now - start_time) >= wait_second
-          sleep(0.3)
-          retry
+          if (Time.now - start_time) < wait_second
+            sleep(0.3)
+            retry
+          end
+
+          $stderr.puts "WARNING: Timeout!! Can't take screenshot"
+          $stderr.puts "  #{e}"
+
+          nil
         end
       end
 

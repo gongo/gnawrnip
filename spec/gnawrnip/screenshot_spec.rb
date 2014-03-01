@@ -32,11 +32,11 @@ module Gnawrnip
           end
 
           it 'should raise Timeout Error' do
-            expect {
-              Capybara.using_wait_time 2 do
-                Screenshot.take
-              end
-            }.to raise_error Timeout::Error
+            screenshot = Capybara.using_wait_time 2 do
+              Screenshot.take
+            end
+
+            expect(screenshot).to be_nil
           end
         end
       end
