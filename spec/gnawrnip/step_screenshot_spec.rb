@@ -3,14 +3,15 @@ require 'gnawrnip/step_screenshot'
 
 module Gnawrnip
   describe StepScreenshot do
-    let(:template) { StepScreenshot }
-
-    it 'exists failure step template' do
-      expect(TurnipFormatter::Step::Failure.templates).to have_key template
-    end
+    let(:template) { described_class.new }
 
     describe '.build' do
-      subject { template.build(data_list) }
+      let(:example) do
+        metadata = { gnawrnip: { screenshot: data_list } }
+        double('example', metadata: metadata)
+      end
+
+      subject { template.build(example) }
 
       context 'has multiple data' do
         let(:data_list) do

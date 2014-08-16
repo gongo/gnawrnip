@@ -1,4 +1,5 @@
 require "gnawrnip/version"
+require 'turnip_formatter'
 require 'gnawrnip/rspec'
 require 'gnawrnip/photographer'
 require 'gnawrnip/publisher'
