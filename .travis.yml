@@ -4,3 +4,8 @@ rvm:
   - 2.0.0
   - 2.1.0
 script: bundle exec rspec
+gemfile:
+  - spec/gemfiles/Gemfile-rspec-2.14.x
+  - spec/gemfiles/Gemfile-rspec-2.99.x
+  - spec/gemfiles/Gemfile-rspec-3.0.x
+
