@@ -4,12 +4,12 @@ require 'gnawrnip/image'
 module Gnawrnip
   describe Image do
     before do
-      Image.any_instance.stub(:canvas).and_return(canvas)
+      allow_any_instance_of(Image).to receive(:canvas).and_return(canvas)
     end
 
     let(:image) do
       Image.new(GnawrnipTest.image('gnawrnip/image'))
-     end
+    end
 
     context 'image size is 640x480' do
       let(:canvas) do
@@ -33,12 +33,12 @@ module Gnawrnip
       describe '.resize' do
         let(:canvas) do
           canvas = super()
-          canvas.should_receive(:resample_bilinear).with(320, 240).and_return(canvas)
+          expect(canvas).to receive(:resample_bilinear).with(320, 240).and_return(canvas)
           canvas
         end
 
         before do
-          Image.any_instance.should_receive(:analysis).twice
+          expect_any_instance_of(Image).to receive(:analysis).twice
         end
 
         it { image.resize(320, 240) }

@@ -6,7 +6,7 @@ module Gnawrnip
     context 'Not support save_screenshot' do
       describe '.tale' do
         before do
-          GnawrnipTest::Session.any_instance.stub(:save_screenshot) do
+          allow_any_instance_of(GnawrnipTest::Session).to receive(:save_screenshot) do
             raise Capybara::NotSupportedByDriverError
           end
         end
@@ -20,7 +20,7 @@ module Gnawrnip
     context 'raise unknown error' do
       describe '.take' do
         before do
-          GnawrnipTest::Session.any_instance.stub(:save_screenshot) do
+          allow_any_instance_of(GnawrnipTest::Session).to receive(:save_screenshot) do
             raise Timeout::Error
           end
         end
@@ -28,7 +28,7 @@ module Gnawrnip
         context 'timeout' do
           before do
             now = Time.now
-            Time.stub(:now).and_return(now, now + 3)
+            allow(Time).to receive(:now).and_return(now, now + 3)
           end
 
           it 'should raise Timeout Error' do
@@ -45,7 +45,7 @@ module Gnawrnip
     context 'success screenshot' do
       describe '.take' do
         before do
-          Screenshot.should_receive(:shot).once
+          expect(Screenshot).to receive(:shot).once
         end
 
         it { Screenshot.take }

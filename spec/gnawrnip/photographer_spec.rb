@@ -3,12 +3,10 @@ require 'gnawrnip/photographer'
 
 module Gnawrnip
   describe Photographer do
-    let(:photographer) do
-      Photographer.new
-    end
+    let(:photographer) { described_class.new }
 
     before do
-      Screenshot.stub(:take).and_return('foo')
+      allow(Screenshot).to receive(:take).and_return('foo')
       photographer.reset!
       photographer.take_shot
       photographer.take_shot
