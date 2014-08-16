@@ -5,6 +5,8 @@ require 'gnawrnip/photographer'
 require 'gnawrnip/publisher'
 
 module Gnawrnip
+  SCREENSHOT_OUTPUT_DIR = File.expand_path('./gnawrnip_tmp')
+
   class << self
     #
     # [Integer] Time (millisecond) between each image in animation
@@ -39,6 +41,12 @@ module Gnawrnip
     def ready!
       require 'gnawrnip/ext/capybara/session' if animation?
       require 'gnawrnip/step_screenshot'
+
+      FileUtils.mkdir_p(SCREENSHOT_OUTPUT_DIR)
+    end
+
+    def finish!
+      FileUtils.rm_rf(SCREENSHOT_OUTPUT_DIR)
     end
 
     def animation?

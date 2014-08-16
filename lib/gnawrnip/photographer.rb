@@ -14,7 +14,6 @@ module Gnawrnip
     # Close tempfiles.
     #
     def discard!
-      frames.compact.each(&:close!)
       reset!
     end
 

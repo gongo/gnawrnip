@@ -1,12 +1,13 @@
+require 'fileutils'
 require 'oily_png'
 
 module Gnawrnip
   class Image
     #
-    # @parma [File] Screenshot image file (png)
+    # @parma [String] filepath  Screenshot image filepath
     #
-    def initialize(file)
-      @file = file
+    def initialize(filepath)
+      @filepath = filepath
       analysis
     end
 
@@ -25,16 +26,12 @@ module Gnawrnip
     end
 
     def to_base64
-      Base64.strict_encode64(File.read(@file.path))
+      Base64.strict_encode64(File.read(@filepath))
     end
 
     def resize(width, height)
-      canvas.resample_bilinear(width, height).save(@file.path)
+      canvas.resample_bilinear(width, height).save(@filepath)
       analysis
-    end
-
-    def close!
-      @file.close!
     end
 
     private
@@ -47,7 +44,7 @@ module Gnawrnip
       end
 
       def canvas
-        OilyPNG::Canvas.from_file(@file)
+        OilyPNG::Canvas.from_file(@filepath)
       end
   end
 end

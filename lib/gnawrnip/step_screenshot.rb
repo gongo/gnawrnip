@@ -22,7 +22,7 @@ module Gnawrnip
       end
     end
 
-  private
+    private
 
     def animation_image(paths)
       text = <<-EOS
