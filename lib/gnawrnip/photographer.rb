@@ -10,13 +10,6 @@ module Gnawrnip
       frames.clear
     end
 
-    #
-    # Close tempfiles.
-    #
-    def discard!
-      reset!
-    end
-
     def frames
       @frames ||= []
     end
