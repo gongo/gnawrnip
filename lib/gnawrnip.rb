@@ -8,11 +8,6 @@ module Gnawrnip
 
   class << self
     #
-    # [Integer] Time (millisecond) between each image in animation
-    #
-    attr_accessor :frame_interval_ms
-
-    #
     # [Boolean] Whether to make animation GIF
     #
     attr_accessor :make_animation
@@ -55,11 +50,14 @@ module Gnawrnip
     def photographer
       @photographer ||= Photographer.new
     end
+
+    def frame_interval_ms=(_)
+      warn 'DEPRECATED: `frame_interval_ms` option is deprecated (not used).'
+    end
   end
 end
 
 Gnawrnip.configure do |c|
-  c.frame_interval_ms = 1000
   c.make_animation    = true
   c.max_frame_size    = nil
 end
