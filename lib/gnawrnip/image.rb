@@ -11,6 +11,14 @@ module Gnawrnip
       analysis
     end
 
+    def to_html(format = :png)
+      width  = width
+      height = height
+      src    = "data:image/#{format};base64,#{to_base64}"
+
+      %Q(<img width="#{width}" height="#{height}" src="#{src}"/>)
+    end
+
     #
     # @return [Fixnum] Width of image
     #

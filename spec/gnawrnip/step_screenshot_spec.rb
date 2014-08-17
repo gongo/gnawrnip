@@ -7,8 +7,7 @@ module Gnawrnip
 
     describe '.build' do
       before :each do
-        allow(Gnawrnip.publisher).to receive(:animation).and_return('')
-        allow(Gnawrnip.publisher).to receive(:single).and_return('')
+        allow(template).to receive(:develop).and_return('')
       end
 
       let(:example) do

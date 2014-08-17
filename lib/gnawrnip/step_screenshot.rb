@@ -1,5 +1,6 @@
 require 'base64'
 require 'turnip_formatter/step_template/exception'
+require 'gnawrnip/developer'
 
 module Gnawrnip
   class StepScreenshot < TurnipFormatter::StepTemplate::Exception
@@ -38,7 +39,7 @@ module Gnawrnip
               </div>
               <div class="slides">
         EOS
-      text += Gnawrnip.publisher.animation(paths)
+      text += develop(paths)
       text + <<-EOS
               </div>
           </div>
@@ -47,8 +48,19 @@ module Gnawrnip
 
     def single_image(path)
       text = '<div class="screenshot">'
-      text += Gnawrnip.publisher.single(path)
+      text += develop([path])
       text + '</div>'
+    end
+
+    def develop(paths)
+      paths.map do |path|
+        image = developer.develop(path)
+        image.to_html
+      end.join
+    end
+
+    def developer
+      @developer ||= Developer.new
     end
   end
 end
