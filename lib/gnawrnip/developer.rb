@@ -42,7 +42,7 @@ module Gnawrnip
         new_height = target / ratio
       end
 
-      return [new_width, new_height]
+      [new_width, new_height]
     end
   end
 end

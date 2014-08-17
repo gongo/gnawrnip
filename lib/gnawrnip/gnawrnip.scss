@@ -1,0 +1,47 @@
+div#steps-statistics section.scenario {
+    div.steps {
+        div.screenshot {
+           img {
+             max-width: 90%;
+             border: 2px solid black;
+           }
+        }
+
+        div.screenshot.animation {
+            > div.nav {
+                text-align: center;
+
+                .pager {
+                    margin-left: auto;
+                    margin-right: auto;
+
+                    span {
+                        font-size: 50px;
+                        display: inline;
+                        color: #999999;
+                        cursor: pointer;
+
+                        &.cycle-pager-active {
+                            color: red;
+                        }
+                    }
+                }
+
+                .manipulate {
+                    margin-bottom: 1em;
+
+                    i {
+                        color: black;
+                        cursor: pointer;
+                        margin-left: 0.3em;
+                        margin-right: 0.3em;
+
+                        &:hover {
+                            color: #aa0000;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

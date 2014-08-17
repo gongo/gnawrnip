@@ -3,19 +3,17 @@ require 'gnawrnip/developer'
 
 module Gnawrnip
   describe Developer do
-    let(:developer) do
-      Developer.new
-    end
+    let(:developer) { described_class.new }
 
     before do
-      Image.any_instance.stub(:analysis)
+      allow_any_instance_of(Image).to receive(:analysis)
     end
 
     context 'No given Gnawrnip.max_frame_size' do
       describe '.develop' do
         before do
           Gnawrnip.max_frame_size = nil
-          Developer.should_not_receive(:resize)
+          expect(Developer).not_to receive(:resize)
         end
 
         it { developer.develop(nil) }
@@ -27,9 +25,9 @@ module Gnawrnip
         describe '.develop' do
           before do
             Gnawrnip.max_frame_size = 300
-            Image.any_instance.stub(:width).and_return(640)
-            Image.any_instance.stub(:height).and_return(480)
-            Image.any_instance.should_receive(:resize).with(300, 225)
+            allow_any_instance_of(Image).to receive(:width).and_return(640)
+            allow_any_instance_of(Image).to receive(:height).and_return(480)
+            expect_any_instance_of(Image).to receive(:resize).with(300, 225)
           end
 
           it { developer.develop(nil) }
@@ -40,9 +38,9 @@ module Gnawrnip
         describe '.develop' do
           before do
             Gnawrnip.max_frame_size = 400
-            Image.any_instance.stub(:width).and_return(480)
-            Image.any_instance.stub(:height).and_return(640)
-            Image.any_instance.should_receive(:resize).with(300, 400)
+            allow_any_instance_of(Image).to receive(:width).and_return(480)
+            allow_any_instance_of(Image).to receive(:height).and_return(640)
+            expect_any_instance_of(Image).to receive(:resize).with(300, 400)
           end
 
           it { developer.develop(nil) }
@@ -53,9 +51,9 @@ module Gnawrnip
         describe '.develop' do
           before do
             Gnawrnip.max_frame_size = 1024
-            Image.any_instance.stub(:width).and_return(640)
-            Image.any_instance.stub(:height).and_return(480)
-            Image.any_instance.should_not_receive(:resize)
+            allow_any_instance_of(Image).to receive(:width).and_return(640)
+            allow_any_instance_of(Image).to receive(:height).and_return(480)
+            expect_any_instance_of(Image).not_to receive(:resize)
           end
 
           it { developer.develop(nil) }

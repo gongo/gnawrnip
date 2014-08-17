@@ -16,8 +16,8 @@ module Gnawrnip
     end
 
     before do
-      Gnawrnip.photographer.stub(:take_shot)
-      Gnawrnip.photographer.stub(:frames) { ['aiueo', nil, 'lllll'] }
+      allow(Gnawrnip.photographer).to receive(:take_shot)
+      allow(Gnawrnip.photographer).to receive(:frames) { ['aiueo', nil, 'lllll'] }
     end
 
     context '"turnip" spec group' do

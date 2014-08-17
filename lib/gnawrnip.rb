@@ -1,9 +1,11 @@
 require "gnawrnip/version"
+require 'turnip_formatter'
 require 'gnawrnip/rspec'
 require 'gnawrnip/photographer'
-require 'gnawrnip/publisher'
 
 module Gnawrnip
+  SCREENSHOT_OUTPUT_DIR = File.expand_path('./gnawrnip_tmp')
+
   class << self
     #
     # [Integer] Time (millisecond) between each image in animation
@@ -38,6 +40,12 @@ module Gnawrnip
     def ready!
       require 'gnawrnip/ext/capybara/session' if animation?
       require 'gnawrnip/step_screenshot'
+
+      FileUtils.mkdir_p(SCREENSHOT_OUTPUT_DIR)
+    end
+
+    def finish!
+      FileUtils.rm_rf(SCREENSHOT_OUTPUT_DIR)
     end
 
     def animation?
@@ -46,14 +54,6 @@ module Gnawrnip
 
     def photographer
       @photographer ||= Photographer.new
-    end
-
-    def publisher
-      @publisher ||= Publisher.new
-    end
-
-    def publisher_driver=(driver)
-      warn "DEPRECATED: `publisher_driver` option is deprecated (not used)."
     end
   end
 end

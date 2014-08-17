@@ -1,12 +1,11 @@
-require 'tempfile'
 require 'time'
 require 'capybara'
-require 'gnawrnip/developer'
+require 'securerandom'
+require 'fileutils'
 
 module Gnawrnip
   class Screenshot
     class << self
-
       #
       # Screenshot of current capybara session
       #
@@ -22,7 +21,7 @@ module Gnawrnip
       #
       #
       # @param   [Fixnum]  wait_second  Second to repeat the retry
-      # @return  [Tempfile]  Image file of screenshot
+      # @return  [String]  Image filename of screenshot
       #
       def take(wait_second = Capybara.default_wait_time)
         start_time = Time.now
@@ -44,20 +43,25 @@ module Gnawrnip
         end
       end
 
-      private
+      def session
+        Capybara.current_session
+      end
 
-        def session
-          Capybara.current_session
-        end
+      #
+      # @return [Gnawrnip::Image]
+      #
+      def shot
+        path = filepath
 
-        #
-        # @return [Gnawrnip::Image]
-        #
-        def shot
-          tempfile = Tempfile.new(['gnawrnip', '.png'])
-          session.save_screenshot(tempfile.path)
-          Developer.new.develop(tempfile)
-        end
+        FileUtils.touch(path)
+        session.save_screenshot(path)
+
+        path
+      end
+
+      def filepath
+        SCREENSHOT_OUTPUT_DIR + '/gnawrnip-' + SecureRandom.uuid + '.png'
+      end
     end
   end
 end
