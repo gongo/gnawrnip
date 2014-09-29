@@ -6,8 +6,8 @@ module Gnawrnip
   class StepScreenshot < TurnipFormatter::StepTemplate::Exception
     on_failed :build
 
-    def self.scss
-      File.read(File.dirname(__FILE__) + '/gnawrnip.scss')
+    def self.css
+      File.read(File.dirname(__FILE__) + '/gnawrnip.css')
     end
 
     def build(example)

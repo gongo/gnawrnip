@@ -1,0 +1,39 @@
+div#steps-statistics section.scenario div.steps div.screenshot img {
+    max-width: 90%;
+    border: 2px solid black;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav {
+    text-align: center;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav .pager {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav .pager span {
+    font-size: 50px;
+    display: inline;
+    color: #999999;
+    cursor: pointer;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav .pager span.cycle-pager-active {
+    color: red;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav .manipulate {
+    margin-bottom: 1em;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav .manipulate i {
+    color: black;
+    cursor: pointer;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+
+div#steps-statistics section.scenario div.steps div.screenshot.animation > div.nav .manipulate i:hover {
+    color: #aa0000;
+}
