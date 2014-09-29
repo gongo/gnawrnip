@@ -18,7 +18,13 @@ module Gnawrnip
       subject { template.build(example) }
 
       context 'has multiple data' do
-        let(:paths) { ['/path/to/A.png', '/path/to/B.png', '/path/to/C.png'] }
+        let(:paths) do
+          [
+            double(path: '/path/to/A.png'),
+            double(path: '/path/to/B.png'),
+            double(path: '/path/to/C.png')
+          ]
+        end
 
         it 'should get image tag and source that base64 encoded' do
           should include '<div class="screenshot animation">'
@@ -27,7 +33,7 @@ module Gnawrnip
       end
 
       context 'has single data' do
-        let(:paths) { ['/path/to/A.png'] }
+        let(:paths) { [double(path: '/path/to/A.png')] }
         it do
           should include '<div class="screenshot">'
           should_not include '<div class="nav">'

@@ -4,8 +4,6 @@ require 'gnawrnip/rspec'
 require 'gnawrnip/photographer'
 
 module Gnawrnip
-  SCREENSHOT_OUTPUT_DIR = File.expand_path('./gnawrnip_tmp')
-
   class << self
     #
     # [Boolean] Whether to make animation GIF
@@ -35,12 +33,6 @@ module Gnawrnip
     def ready!
       require 'gnawrnip/ext/capybara/session' if animation?
       require 'gnawrnip/step_screenshot'
-
-      FileUtils.mkdir_p(SCREENSHOT_OUTPUT_DIR)
-    end
-
-    def finish!
-      FileUtils.rm_rf(SCREENSHOT_OUTPUT_DIR)
     end
 
     def animation?
@@ -58,6 +50,6 @@ module Gnawrnip
 end
 
 Gnawrnip.configure do |c|
-  c.make_animation    = true
-  c.max_frame_size    = nil
+  c.make_animation = true
+  c.max_frame_size = nil
 end

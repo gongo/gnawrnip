@@ -5,10 +5,6 @@ RSpec.configure do |config|
     Gnawrnip.ready!
   end
 
-  config.after(:all) do
-    Gnawrnip.finish!
-  end
-
   # https://github.com/jnicklas/capybara/blob/master/lib/capybara/rspec.rb
   fetch_current_example = RSpec.respond_to?(:current_example) ?
     proc { RSpec.current_example } : proc { |context| context.example }

@@ -46,15 +46,15 @@ module Gnawrnip
         EOS
     end
 
-    def single_image(path)
+    def single_image(file)
       text = '<div class="screenshot">'
-      text += develop([path])
+      text += develop([file.path])
       text + '</div>'
     end
 
-    def develop(paths)
-      paths.map do |path|
-        image = developer.develop(path)
+    def develop(files)
+      files.map do |file|
+        image = developer.develop(file.path)
         image.to_html
       end.join
     end
