@@ -1,4 +1,4 @@
 --colour
--r turnip
+-r turnip/rspec
 -r turnip/capybara
 
