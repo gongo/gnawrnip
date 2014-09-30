@@ -25,7 +25,7 @@ module Capybara
       alias_method "after_hook_#{method}".to_sym, method
 
       define_method method do |*args, &block|
-        Gnawrnip.photographer.take_shot
+        Gnawrnip.photographer.take_shot if current_url != 'about:blank'
         send("after_hook_#{method}", *args, &block)
       end
     end

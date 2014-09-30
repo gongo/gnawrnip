@@ -22,6 +22,10 @@ RSpec.configure do |config|
       Gnawrnip.photographer.take_shot
       screenshots = Gnawrnip.photographer.frames.compact
       example.metadata[:gnawrnip][:screenshot] = screenshots
+    else
+      Gnawrnip.photographer.frames.compact.each do |fp|
+        fp.close!
+      end
     end
   end
 end
