@@ -1,4 +1,3 @@
-require 'base64'
 require 'turnip_formatter/step_template/exception'
 require 'gnawrnip/developer'
 
@@ -48,7 +47,7 @@ module Gnawrnip
 
     def single_image(file)
       text = '<div class="screenshot">'
-      text += develop([file.path])
+      text += develop([file])
       text + '</div>'
     end
 
