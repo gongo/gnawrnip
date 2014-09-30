@@ -1,4 +1,3 @@
-require 'base64'
 require 'turnip_formatter/step_template/exception'
 require 'gnawrnip/developer'
 
