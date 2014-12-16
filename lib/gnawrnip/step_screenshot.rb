@@ -65,8 +65,8 @@ module Gnawrnip
 end
 
 TurnipFormatter.configure do |c|
-  c.add_javascript('http://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/20130801/jquery.cycle2.min.js')
-  c.add_stylesheet('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
+  c.add_javascript('https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/20130801/jquery.cycle2.min.js')
+  c.add_stylesheet('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
 
   c.add_javascript(File.dirname(__FILE__) + '/gnawrnip.js')
 end
