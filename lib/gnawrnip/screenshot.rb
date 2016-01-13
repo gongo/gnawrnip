@@ -21,7 +21,7 @@ module Gnawrnip
       # @param   [Fixnum]  wait_second  Second to repeat the retry
       # @return  [Tempfile]  Image file of screenshot
       #
-      def take(wait_second = Capybara.default_wait_time)
+      def take(wait_second = Capybara.default_max_wait_time)
         start_time = Time.now
 
         begin
