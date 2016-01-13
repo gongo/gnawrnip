@@ -14,6 +14,6 @@ rvm:
 script: bundle exec rspec
 
 gemfile:
-  - spec/gemfiles/Gemfile-rspec-3.3.x
-  - spec/gemfiles/Gemfile-rspec-3.4.x
+  - gemfiles/Gemfile-rspec-3.3.x
+  - gemfiles/Gemfile-rspec-3.4.x
 
