@@ -1,11 +1,19 @@
 language: ruby
+
+sudo: false
+cache: bundler
+
+branches:
+  only:
+    - master
+
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
+  - 2.1
+  - 2.2
+
 script: bundle exec rspec
+
 gemfile:
-  - spec/gemfiles/Gemfile-rspec-2.14.x
-  - spec/gemfiles/Gemfile-rspec-2.99.x
-  - spec/gemfiles/Gemfile-rspec-3.0.x
+  - gemfiles/Gemfile-rspec-3.3.x
+  - gemfiles/Gemfile-rspec-3.4.x
 
