@@ -32,3 +32,14 @@ module Capybara
     GnawrnipTest::Session.new
   end
 end
+
+require 'rspec/core/sandbox'
+
+RSpec.configure do |c|
+  c.around :each do |ex|
+    RSpec::Core::Sandbox.sandboxed do |config|
+      load 'gnawrnip/rspec.rb'
+      ex.run
+    end
+  end
+end

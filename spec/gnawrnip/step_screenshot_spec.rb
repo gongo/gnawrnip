@@ -10,12 +10,15 @@ module Gnawrnip
         allow(template).to receive(:develop).and_return('')
       end
 
-      let(:example) do
+      let(:step) do
         metadata = { gnawrnip: { screenshot: paths } }
-        double('example', metadata: metadata)
+
+        double('step', example: { metadata: metadata }).tap do |step|
+          allow(step).to receive_message_chain(:example, :metadata) { metadata }
+        end
       end
 
-      subject { template.build(example) }
+      subject { template.build(step) }
 
       context 'has multiple data' do
         let(:paths) do
