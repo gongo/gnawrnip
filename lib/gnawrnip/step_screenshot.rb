@@ -1,16 +1,19 @@
-require 'turnip_formatter/step_template/exception'
+require 'turnip_formatter/step_template/base'
 require 'gnawrnip/developer'
 
 module Gnawrnip
-  class StepScreenshot < TurnipFormatter::StepTemplate::Exception
+  class StepScreenshot < TurnipFormatter::StepTemplate::Base
     on_failed :build
 
     def self.css
       File.read(File.dirname(__FILE__) + '/gnawrnip.css')
     end
 
-    def build(example)
-      images = example.metadata[:gnawrnip][:screenshot]
+    #
+    # @param  [TurnipFormatter::Resource::Step::Failure]  step
+    #
+    def build(step)
+      images = step.example.metadata[:gnawrnip][:screenshot]
 
       case images.length
       when 0
