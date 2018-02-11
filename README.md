@@ -16,7 +16,7 @@ So it have potential for massive refactorings (that could be API breaking).
 ## Requirements
 
 * Ruby
-    * `2.1.0` or higher
+    * `2.2.0` or higher
 * RubyGems
     * capybara `~> 2.1.0`
     * turnip_formatter
